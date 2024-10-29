@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Scraper</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Web Scraper</h1>
+      <p>Crawl any Website in minutes</p>
+
+      <form method="POST">
+        <input
+          type="text"
+          name="url"
+          placeholder="Enter Website URL"
+          required
+        />
+        <div class="options">
+          <button type="submit" name="option" value="links">Links</button>
+          <button type="submit" name="option" value="emails">Emails</button>
+          <button type="submit" name="option" value="p_tag">P</button>
+          <br />
+          <input
+            type="text"
+            name="css_selector"
+            placeholder="Enter CSS Selector"
+          />
+          <button type="submit" name="option" value="text">Text</button>
+          <input
+            type="text"
+            name="regex_pattern"
+            placeholder="Enter Regex Pattern (optional)"
+          />
+          <button type="submit" name="option" value="regex">Regex</button>
+        </div>
+      </form>
+      <div class="result">
+        {% if result %}
+        <h2>Results:</h2>
+        <pre>
+            {% for item in result %}
+                {{ item }}
+            {% endfor %}
+        </pre>
+        <a href="/download/csv"><button>Download CSV</button></a>
+        <a href="/download/xlsx"><button>Download XLSX</button></a>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
